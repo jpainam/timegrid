@@ -1,0 +1,3 @@
+{
+  "extends": "@timegrid/config/tsconfig.base.json"
+}

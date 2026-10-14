@@ -1,0 +1,35 @@
+{
+  "name": "timegrid",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "type": "module",
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "check-types": "turbo run check-types",
+    "dev:native": "turbo run dev -F native --",
+    "dev:web": "turbo run dev -F web --",
+    "env:generate": "varlock codegen --path ./apps/web/ && varlock codegen --path ./apps/native/",
+    "postinstall": "varlock codegen --path ./apps/web/ && varlock codegen --path ./apps/native/",
+    "prepare": "husky"
+  },
+  "dependencies": {
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@timegrid/config": "workspace:*",
+    "@types/node": "catalog:",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.6.0",
+    "turbo": "^2.11.7",
+    "typescript": "^6.0.3",
+    "varlock": "catalog:"
+  },
+  "lint-staged": {
+    "**/*.{js,mjs,cjs,jsx,ts,mts,cts,tsx,vue,astro,svelte}": ""
+  },
+  "packageManager": "pnpm@10.27.0"
+}
