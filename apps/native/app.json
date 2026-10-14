@@ -9,7 +9,7 @@
     "userInterfaceStyle": "automatic",
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.anonymous.timegrid"
+      "bundleIdentifier": "llabs.timegrid.app"
     },
     "android": {
       "adaptiveIcon": {
@@ -19,7 +19,7 @@
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
       "predictiveBackGestureEnabled": false,
-      "package": "com.anonymous.timegrid"
+      "package": "llabs.timegrid.app"
     },
     "web": {
       "output": "static",
@@ -43,6 +43,13 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
-    }
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "7bdd6207-fcf8-40c6-95f7-4d1f3b20fbfe"
+      }
+    },
+    "owner": "logesta-labs-llc"
   }
 }
