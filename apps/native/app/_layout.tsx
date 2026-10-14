@@ -1,27 +1,24 @@
 import "@/i18n/i18next";
 
 import { AppSettingsContext, AppSettingsProvider } from "@/context/AppSettings";
-
-import { getNavigationTheme, getSystemColor } from "@/theme/colors";
-import { BORDER_RADIUS } from "@/theme/dimensions";
-
+import { TimeGridProvider, useTimeGrid } from "@/src/context/timegrid";
+import { getNavigationTheme } from "@/theme/colors";
 import * as Haptics from "expo-haptics";
 import { Stack } from "expo-router";
 import { ThemeProvider } from "expo-router/react-navigation";
 import { StatusBar } from "expo-status-bar";
 import { PressablesConfig } from "pressto";
-import { use } from "react";
+import { use, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { useColorScheme } from "react-native";
+import { Appearance, useColorScheme } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { KeyboardProvider } from "react-native-keyboard-controller";
-import { Toaster } from "sonner-native";
 
 export default function RootLayout() {
   return (
-    <>
-      <AppSettingsProvider>
-        <GestureHandlerRootView>
+    <AppSettingsProvider>
+      <TimeGridProvider>
+        <GestureHandlerRootView style={{ flex: 1 }}>
           <KeyboardProvider>
             <PressablesConfig
               globalHandlers={{
@@ -35,22 +32,28 @@ export default function RootLayout() {
             </PressablesConfig>
           </KeyboardProvider>
         </GestureHandlerRootView>
-      </AppSettingsProvider>
-    </>
+      </TimeGridProvider>
+    </AppSettingsProvider>
   );
 }
 
 function RootLayoutInner() {
+  const { t } = useTranslation("timegrid");
   const colorScheme = useColorScheme();
   const { settings } = use(AppSettingsContext);
-  const { t } = useTranslation("settings");
-
-  const dark = colorScheme === "dark";
+  const { preferences } = useTimeGrid();
+  useEffect(() => {
+    Appearance.setColorScheme(
+      preferences.theme === "system" ? "unspecified" : preferences.theme,
+    );
+  }, [preferences.theme]);
+  const dark =
+    preferences.theme === "system"
+      ? colorScheme === "dark"
+      : preferences.theme === "dark";
   const brandPrimary = dark
     ? settings.brandPrimaryDark
     : settings.brandPrimaryLight;
-
-  const hasAccess = settings.isOnboarded;
 
   return (
     <>
@@ -62,29 +65,34 @@ function RootLayoutInner() {
               headerShown: false,
             }}
           />
-
           <Stack.Screen
-            name="privacy-policy"
+            name="add-city"
+            options={{ presentation: "modal", title: t("add") }}
+          />
+          <Stack.Screen
+            name="manage-cities"
+            options={{ presentation: "modal", title: t("manage") }}
+          />
+          <Stack.Screen
+            name="jump-time"
             options={{
-              title: t("privacyPolicy"),
-              headerBackButtonDisplayMode: "minimal",
+              presentation: "formSheet",
+              sheetAllowedDetents: [0.7, 1],
+              sheetGrabberVisible: true,
+              title: t("jump"),
             }}
           />
           <Stack.Screen
-            name="terms-of-service"
+            name="settings"
             options={{
-              title: t("termsOfService"),
-              headerBackButtonDisplayMode: "minimal",
+              presentation: "formSheet",
+              sheetAllowedDetents: [0.6, 1],
+              sheetGrabberVisible: true,
+              title: t("settings"),
             }}
           />
         </Stack>
       </ThemeProvider>
-      <Toaster
-        style={{
-          backgroundColor: getSystemColor("secondaryBackground") as string,
-          borderRadius: BORDER_RADIUS.MD,
-        }}
-      />
       <StatusBar style={dark ? "light" : "dark"} />
     </>
   );

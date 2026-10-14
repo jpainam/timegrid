@@ -10,12 +10,14 @@
     "prebuild": "expo prebuild",
     "web": "expo start --web",
     "check-types": "tsc --noEmit",
+    "test": "node --test src/domain/time.test.mjs",
     "env:generate": "varlock codegen"
   },
   "dependencies": {
     "@codewithbeto/ui": "^55.0.0",
     "@expo/ui": "~57.0.16",
     "@expo/vector-icons": "^15.0.2",
+    "@react-native-community/datetimepicker": "9.1.0",
     "@tanstack/react-query": "^5.102.8",
     "@varlock/expo-integration": "1.2.1",
     "expo": "~57.0.20",

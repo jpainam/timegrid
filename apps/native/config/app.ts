@@ -12,7 +12,7 @@ export function toSlug(name: string): string {
     .replace(/^-|-$/g, "");
 }
 
-const APP_NAME = "WorldPray";
+const APP_NAME = "TimeGrid";
 
 export const appConfig = {
   // Identity — only `name` and `bundleId` need to be set manually.
@@ -20,17 +20,17 @@ export const appConfig = {
   name: APP_NAME,
   slug: toSlug(APP_NAME),
   bundleId: "llabs.timegrid.app",
-  description: "World Clock",
+  description: "Scroll and compare time zones on one timeline.",
   contactEmail: "contact@logestalabs.com",
 
   // Theme
   theme: {
     // Developer customizes these — hex values, dead simple
     brand: {
-      primary: { light: "#3444A0", dark: "#A3B1F7" }, // Twilight blue
-      onPrimary: { light: "#FFFFFF", dark: "#10163A" },
-      accent: { light: "#C9800F", dark: "#F2B544" }, // Candlelight gold
-      onAccent: { light: "#2B1A00", dark: "#2B1A00" },
+      primary: { light: "#165E9C", dark: "#AED5FF" },
+      onPrimary: { light: "#FFFFFF", dark: "#102033" },
+      accent: { light: "#165E9C", dark: "#AED5FF" },
+      onAccent: { light: "#FFFFFF", dark: "#102033" },
       useAndroidDynamic: true,
     },
     // Native by default, optional hex override
@@ -49,45 +49,6 @@ export const appConfig = {
     borderWidth: "none",
   },
 
-  // Prayer domain rules — see PRODUCT.md § 10, § 12, § 27
-  prayer: {
-    maxConcurrentCommitments: 5,
-    reminderLeadMinutes: 15,
-  },
-
-  // Support the Mission — PRODUCT.md § 4
-  support: {
-    enabled: true,
-    backgroundImage: "",
-  },
-
-  // Monetization — optional contributions only, never a gate on prayer.
-  monetization: {
-    // Test store key — create a project at revenuecat.com and paste your test key here.
-    // Same key for iOS and Android. See docs/REVENUECAT.md for setup instructions.
-    revenueCatApiKeyTestStore: {
-      ios: "test_rfgBkAEDCaKHhKUBNDBsapClBux",
-      android: "test_rfgBkAEDCaKHhKUBNDBsapClBux",
-    },
-    // Production keys — required for App Store / Play Store builds.
-    revenueCatApiKey: {
-      ios: "appl_LfAysaBZTUZYcfIjOpQkSpFXUiN",
-      android: "goog_XABuzQaTFsTGJdGtjAIazgBbgPn",
-    },
-    entitlements: ["worldpray_pro"],
-  },
-
-  // Feature Flags
-  features: {
-    support: true,
-  },
-
-  // Onboarding — PRODUCT.md § 5
-  onboarding: {
-    enabled: true,
-  },
-
-  // Internationalization — see docs/I18N.md
   i18n: {
     enabled: true,
     defaultLanguage: "device",
@@ -95,12 +56,8 @@ export const appConfig = {
     supportedLanguages: ["en", "es", "fr"],
   },
 
-  // Links
-  links: {
-    // Shared by "Share This App" until the app has a store URL.
-    website: "https://worldpray.app",
-    privacyPolicy: "https://worldpray.app/privacy",
-    termsOfService: "https://worldpray.app/terms",
-    support: "mailto:hello@worldpray.app",
+  prayer: {
+    maxConcurrentCommitments: 5,
   },
+
 } as const satisfies AppConfig;
