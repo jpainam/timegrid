@@ -62,7 +62,7 @@ export default function Settings() {
   const [contentWidth, setContentWidth] = useState(width);
   return (
     <ScrollView
-      style={{ flex: 1, backgroundColor: system.background }}
+      style={{ flex: 1, backgroundColor: "transparent" }}
       contentInsetAdjustmentBehavior="automatic"
       onLayout={(event) => setContentWidth(event.nativeEvent.layout.width)}
       contentContainerStyle={{ paddingTop: 18, paddingBottom: 30 }}

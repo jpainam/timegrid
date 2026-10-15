@@ -114,6 +114,7 @@ function RootLayoutInner() {
               sheetGrabberVisible: true,
               title: t("settings"),
               headerTransparent: Platform.OS === "ios",
+              headerShown: false,
               contentStyle:
                 Platform.OS === "ios" && isLiquidGlassAvailable()
                   ? { backgroundColor: "transparent" as const }

@@ -24,6 +24,7 @@ import { Text } from "@codewithbeto/ui";
 import { useCalendars } from "expo-localization";
 import { router } from "expo-router";
 import { SymbolView } from "expo-symbols";
+import { PressableScale } from "pressto";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
@@ -633,13 +634,13 @@ export function TimeGridScreen() {
               gap: 8,
             }}
           >
-            <NativeAction
-              label={t("jump")}
+            <PressableScale
               onPress={() => router.push("/jump-time")}
-              alignment="leading"
-              width={Math.max(140, width - 128)}
-              height={48}
-              contentStyle={{
+              accessibilityRole="button"
+              accessibilityLabel={t("jump")}
+              style={{
+                width: Math.max(140, width - 128),
+                height: 48,
                 flexDirection: "row",
                 alignItems: "center",
                 gap: 9,
@@ -677,7 +678,7 @@ export function TimeGridScreen() {
                   </Text>
                 )}
               </View>
-            </NativeAction>
+            </PressableScale>
             <NativeAction
               label={t("now")}
               onPress={() => jumpTo(utcHour(Date.now()))}
