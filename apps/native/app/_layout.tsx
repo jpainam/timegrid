@@ -3,6 +3,7 @@ import "@/i18n/i18next";
 import { AppSettingsContext, AppSettingsProvider } from "@/context/AppSettings";
 import { TimeGridProvider, useTimeGrid } from "@/src/context/timegrid";
 import { getNavigationTheme } from "@/theme/colors";
+import { isLiquidGlassAvailable } from "expo-glass-effect";
 import * as Haptics from "expo-haptics";
 import { Stack } from "expo-router";
 import { ThemeProvider } from "expo-router/react-navigation";
@@ -10,7 +11,7 @@ import { StatusBar } from "expo-status-bar";
 import { PressablesConfig } from "pressto";
 import { use, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { Appearance, useColorScheme } from "react-native";
+import { Appearance, Platform, useColorScheme } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { KeyboardProvider } from "react-native-keyboard-controller";
 
@@ -67,11 +68,29 @@ function RootLayoutInner() {
           />
           <Stack.Screen
             name="add-city"
-            options={{ presentation: "modal", title: t("add") }}
+            options={{
+              presentation: "formSheet",
+              sheetGrabberVisible: true,
+              title: t("add"),
+              headerTransparent: Platform.OS === "ios",
+              contentStyle:
+                Platform.OS === "ios" && isLiquidGlassAvailable()
+                  ? { backgroundColor: "transparent" as const }
+                  : undefined,
+            }}
           />
           <Stack.Screen
             name="manage-cities"
-            options={{ presentation: "modal", title: t("manage") }}
+            options={{
+              presentation: "formSheet",
+              sheetGrabberVisible: true,
+              headerTransparent: Platform.OS === "ios",
+              contentStyle:
+                Platform.OS === "ios" && isLiquidGlassAvailable()
+                  ? { backgroundColor: "transparent" as const }
+                  : undefined,
+              title: t("manage"),
+            }}
           />
           <Stack.Screen
             name="jump-time"
@@ -80,6 +99,11 @@ function RootLayoutInner() {
               sheetAllowedDetents: [0.7, 1],
               sheetGrabberVisible: true,
               title: t("jump"),
+              headerTransparent: Platform.OS === "ios",
+              contentStyle:
+                Platform.OS === "ios" && isLiquidGlassAvailable()
+                  ? { backgroundColor: "transparent" as const }
+                  : undefined,
             }}
           />
           <Stack.Screen
@@ -89,6 +113,11 @@ function RootLayoutInner() {
               sheetAllowedDetents: [0.6, 1],
               sheetGrabberVisible: true,
               title: t("settings"),
+              headerTransparent: Platform.OS === "ios",
+              contentStyle:
+                Platform.OS === "ios" && isLiquidGlassAvailable()
+                  ? { backgroundColor: "transparent" as const }
+                  : undefined,
             }}
           />
         </Stack>

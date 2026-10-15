@@ -106,12 +106,7 @@ Prefer sheets for Add City, Manage Cities, and date/time jump so users return di
 ├──────────────┼──────────────┼────────────┤
 │ 6:00 AM      │ 2:00 PM      │ 3:00 PM    │
 │ 7:00 AM      │ 3:00 PM      │ 4:00 PM    │
-│▶8:00 AM      │ 4:00 PM      │ 5:00 PM    │ ← selected instant
-│ 9:00 AM      │ 5:00 PM      │ 6:00 PM    │
-│ 10:00 AM     │ 6:00 PM      │ 7:00 PM    │
-│      ↕ vertical: move through time       │
-│      ↔ horizontal: move through cities   │
-└──────────────┴──────────────┴────────────┘
+│▶8:00 AM      │ 4:00 PM      │ 5:00 PM    │ ← 
 ```
 
 *Example values above apply when California is on PDT and Douala is on WAT. The production UI must compute all values from the actual selected date.*

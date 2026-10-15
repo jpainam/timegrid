@@ -6,20 +6,20 @@ import {
   searchCities,
   type City,
 } from "@/src/domain/cities";
-import { useTranslation } from 'react-i18next';
 import { useBrandColors, useSystemColors } from "@/theme/colors";
 import { Text } from "@codewithbeto/ui";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { router, Stack } from "expo-router";
 import { useMemo, useState } from "react";
-import { FlatList, TextInput, View, useWindowDimensions } from "react-native";
+import { useTranslation } from "react-i18next";
+import { FlatList, useWindowDimensions, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function AddCity() {
   const system = useSystemColors();
   const brand = useBrandColors();
-  const { t, i18n } = useTranslation('timegrid');
-  const locale = i18n.resolvedLanguage ?? 'en';
+  const { t, i18n } = useTranslation("timegrid");
+  const locale = i18n.resolvedLanguage ?? "en";
   const { preferences, addCity } = useTimeGrid();
   const [query, setQuery] = useState("");
   const results = useMemo(() => searchCities(query, locale), [query, locale]);
@@ -38,7 +38,7 @@ export default function AddCity() {
           }
         }}
         disabled={added}
-        label={`${item.name}, ${countryName(item.countryCode, locale)}, ${item.timeZone}${added ? `, ${t('alreadyAdded')}` : ""}`}
+        label={`${item.name}, ${countryName(item.countryCode, locale)}, ${item.timeZone}${added ? `, ${t("alreadyAdded")}` : ""}`}
         alignment="leading"
         width={listWidth}
         height={68}
@@ -53,9 +53,7 @@ export default function AddCity() {
       >
         <Text style={{ fontSize: 24 }}>{flagFor(item.countryCode)}</Text>
         <View style={{ flex: 1 }}>
-          <Text
-            style={{ color: system.text, fontSize: 16, fontWeight: "600" }}
-          >
+          <Text style={{ color: system.text, fontSize: 16, fontWeight: "600" }}>
             {item.name}
           </Text>
           <Text
@@ -70,57 +68,24 @@ export default function AddCity() {
         </View>
         {added ? (
           <Text style={{ color: system.secondaryText, fontSize: 12 }}>
-            {t('alreadyAdded')}
+            {t("alreadyAdded")}
           </Text>
         ) : (
-          <Ionicons
-            name="add-circle-outline"
-            size={24}
-            color={brand.primary}
-          />
+          <Ionicons name="add-circle-outline" size={24} color={brand.primary} />
         )}
       </NativeAction>
     );
   };
 
   return (
-    <View style={{ flex: 1, backgroundColor: system.background }}>
-      <Stack.Screen options={{ title: t('add') }} />
-      <View
-        style={{
-          margin: 16,
-          minHeight: 48,
-          flexDirection: "row",
-          alignItems: "center",
-          paddingHorizontal: 13,
-          gap: 9,
-          borderRadius: 13,
-          backgroundColor: system.secondaryBackground,
-        }}
-      >
-        <Ionicons name="search-outline" size={20} color={system.secondaryText} />
-        <TextInput
-          autoFocus
-          value={query}
-          onChangeText={setQuery}
-          placeholder={t('search')}
-          placeholderTextColor={system.secondaryText}
-          autoCapitalize="none"
-          autoCorrect={false}
-          style={{ flex: 1, color: system.text, fontSize: 16, minHeight: 46 }}
-        />
-        {!!query && (
-          <NativeAction
-            onPress={() => setQuery("")}
-            label={t('dismiss')}
-            width={44}
-            height={44}
-            contentStyle={{ alignItems: "center" }}
-          >
-            <Ionicons name="close-circle" size={20} color={system.secondaryText} />
-          </NativeAction>
-        )}
-      </View>
+    <Stack.Screen options={{ title: t("add") }}>
+      <Stack.SearchBar
+        placeholder={t("search")}
+        hideWhenScrolling={false}
+        onChangeText={(event) => setQuery(event.nativeEvent.text)}
+        onCancelButtonPress={() => setQuery("")}
+      />
+
       <FlatList
         data={results}
         onLayout={(event) => setListWidth(event.nativeEvent.layout.width)}
@@ -132,11 +97,11 @@ export default function AddCity() {
         ListEmptyComponent={
           <View style={{ padding: 26 }}>
             <Text style={{ color: system.secondaryText, textAlign: "center" }}>
-              {t('noResults')}
+              {t("noResults")}
             </Text>
           </View>
         }
       />
-    </View>
+    </Stack.Screen>
   );
 }
