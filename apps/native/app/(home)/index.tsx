@@ -60,7 +60,7 @@ export default function Index() {
     <Stack.Screen
       options={{
         title: appConfig.name,
-        headerLargeTitleEnabled: true,
+        //headerLargeTitleEnabled: true,
         ...androidHeaderActions(actions),
       }}
     >

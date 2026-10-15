@@ -553,35 +553,6 @@ export function TimeGridScreen() {
 
   return (
     <View style={{ flex: 1, backgroundColor: system.background }}>
-      <View
-        style={{
-          paddingHorizontal: 18,
-          paddingTop: 8,
-          paddingBottom: 8,
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-        }}
-      >
-        <View>
-          <Text
-            style={{
-              color: system.text,
-              fontSize: 31,
-              fontWeight: "700",
-              letterSpacing: -0.8,
-            }}
-          >
-            TimeGrid
-          </Text>
-          <Text
-            style={{ color: system.secondaryText, fontSize: 14, marginTop: 1 }}
-          >
-            {t("tagline")}
-          </Text>
-        </View>
-      </View>
-
       {error && (
         <NativeAction
           label={`${error} · ${t("dismiss")}`}
@@ -655,7 +626,7 @@ export function TimeGridScreen() {
         <>
           <View
             style={{
-              paddingHorizontal: 16,
+              //paddingHorizontal: 16,
               paddingVertical: 14,
               flexDirection: "row",
               alignItems: "center",
