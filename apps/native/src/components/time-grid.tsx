@@ -21,9 +21,9 @@ import {
   type SystemColors,
 } from "@/theme/colors";
 import { Text } from "@codewithbeto/ui";
-import Ionicons from "@expo/vector-icons/Ionicons";
 import { useCalendars } from "expo-localization";
 import { router } from "expo-router";
+import { SymbolView } from "expo-symbols";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
@@ -610,7 +610,11 @@ export function TimeGridScreen() {
             gap: 12,
           }}
         >
-          <Ionicons name="globe-outline" size={46} color={brand.primary} />
+          <SymbolView
+            name={{ ios: "globe", android: "public", web: "public" }}
+            size={46}
+            tintColor={brand.primary}
+          />
           <Text
             style={{
               fontSize: 21,
@@ -670,10 +674,14 @@ export function TimeGridScreen() {
                 gap: 9,
               }}
             >
-              <Ionicons
-                name="calendar-outline"
+              <SymbolView
+                name={{
+                  ios: "calendar",
+                  android: "calendar_today",
+                  web: "calendar_today",
+                }}
                 size={21}
-                color={brand.primary}
+                tintColor={brand.primary}
               />
               <View style={{ flexShrink: 1 }}>
                 <Text
@@ -714,7 +722,15 @@ export function TimeGridScreen() {
                 gap: 5,
               }}
             >
-              <Ionicons name="refresh-outline" size={16} color={system.text} />
+              <SymbolView
+                name={{
+                  ios: "arrow.clockwise",
+                  android: "refresh",
+                  web: "refresh",
+                }}
+                size={16}
+                tintColor={system.text}
+              />
               <Text
                 style={{ color: system.text, fontSize: 14, fontWeight: "600" }}
               >

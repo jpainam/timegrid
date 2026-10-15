@@ -3,8 +3,8 @@ import { useTimeGrid, type ThemeChoice } from "@/src/context/timegrid";
 import type { HourFormat } from "@/src/domain/time";
 import { useBrandColors, useSystemColors } from "@/theme/colors";
 import { Text } from "@codewithbeto/ui";
-import Ionicons from "@expo/vector-icons/Ionicons";
 import { router, Stack } from "expo-router";
+import { SymbolView } from "expo-symbols";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ScrollView, useWindowDimensions } from "react-native";
@@ -44,7 +44,11 @@ function Choice<T extends string>({
     >
       <Text style={{ color: system.text, fontSize: 16 }}>{label}</Text>
       {selected && (
-        <Ionicons name="checkmark" size={22} color={brand.primary} />
+        <SymbolView
+          name={{ ios: "checkmark", android: "check", web: "check" }}
+          size={22}
+          tintColor={brand.primary}
+        />
       )}
     </NativeAction>
   );
@@ -137,10 +141,14 @@ export default function Settings() {
         }}
       >
         <Text style={{ color: system.text, fontSize: 16 }}>{t("manage")}</Text>
-        <Ionicons
-          name="chevron-forward"
+        <SymbolView
+          name={{
+            ios: "chevron.right",
+            android: "chevron_right",
+            web: "chevron_right",
+          }}
           size={18}
-          color={system.secondaryText}
+          tintColor={system.secondaryText}
         />
       </NativeAction>
     </ScrollView>

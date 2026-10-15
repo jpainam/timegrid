@@ -4,8 +4,8 @@ import { countryName, flagFor, type City } from '@/src/domain/cities';
 import { useTranslation } from 'react-i18next';
 import { useBrandColors, useSystemColors } from '@/theme/colors';
 import { Text } from '@codewithbeto/ui';
-import Ionicons from '@expo/vector-icons/Ionicons';
 import { router, Stack } from 'expo-router';
+import { SymbolView } from 'expo-symbols';
 import { useMemo, useState } from 'react';
 import { PanResponder, ScrollView, View, useWindowDimensions } from 'react-native';
 
@@ -24,7 +24,11 @@ function ManagedCity({ city, index, count }: { city: City; index: number; count:
     borderBottomWidth: 1, borderBottomColor: system.separator, backgroundColor: system.secondaryBackground }}>
     <View {...drag.panHandlers} accessibilityLabel={`${t('drag')}: ${city.name}`} accessibilityRole="adjustable"
       style={{ width: 38, minHeight: 50, justifyContent: 'center', alignItems: 'center' }}>
-      <Ionicons name="reorder-three" size={25} color={system.secondaryText} />
+      <SymbolView
+        name={{ ios: 'line.3.horizontal', android: 'reorder', web: 'reorder' }}
+        size={25}
+        tintColor={system.secondaryText}
+      />
     </View>
     <Text style={{ fontSize: 23 }}>{flagFor(city.countryCode)}</Text>
     <View style={{ flex: 1 }}>
@@ -34,19 +38,35 @@ function ManagedCity({ city, index, count }: { city: City; index: number; count:
     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
       <NativeAction onPress={() => setHomeCity(city.id)} label={`${t('setHome')}: ${city.name}`}
         width={44} height={44} contentStyle={{ alignItems: 'center' }}>
-        <Ionicons name={isHome ? 'home' : 'home-outline'} size={20} color={isHome ? brand.primary : system.secondaryText} />
+        <SymbolView
+          name={{ ios: isHome ? 'house.fill' : 'house', android: 'home', web: 'home' }}
+          size={20}
+          tintColor={isHome ? brand.primary : system.secondaryText}
+        />
       </NativeAction>
       <NativeAction onPress={() => moveCity(city.id, index - 1)} disabled={index === 0} label={`${t('up')}: ${city.name}`}
         width={40} height={44} contentStyle={{ alignItems: 'center' }}>
-        <Ionicons name="chevron-up" size={19} color={index === 0 ? system.separator : system.secondaryText} />
+        <SymbolView
+          name={{ ios: 'chevron.up', android: 'keyboard_arrow_up', web: 'keyboard_arrow_up' }}
+          size={19}
+          tintColor={index === 0 ? system.separator : system.secondaryText}
+        />
       </NativeAction>
       <NativeAction onPress={() => moveCity(city.id, index + 1)} disabled={index === count - 1} label={`${t('down')}: ${city.name}`}
         width={40} height={44} contentStyle={{ alignItems: 'center' }}>
-        <Ionicons name="chevron-down" size={19} color={index === count - 1 ? system.separator : system.secondaryText} />
+        <SymbolView
+          name={{ ios: 'chevron.down', android: 'keyboard_arrow_down', web: 'keyboard_arrow_down' }}
+          size={19}
+          tintColor={index === count - 1 ? system.separator : system.secondaryText}
+        />
       </NativeAction>
       <NativeAction onPress={() => removeCity(city.id)} label={`${t('remove')}: ${city.name}`}
         width={44} height={44} contentStyle={{ alignItems: 'center' }}>
-        <Ionicons name="trash-outline" size={20} color={system.secondaryText} />
+        <SymbolView
+          name={{ ios: 'trash', android: 'delete', web: 'delete' }}
+          size={20}
+          tintColor={system.secondaryText}
+        />
       </NativeAction>
     </View>
   </View>;
@@ -66,7 +86,11 @@ export default function ManageCities() {
       <NativeAction onPress={() => router.push('/add-city')} label={t('add')}
         alignment="leading"
         width={contentWidth} height={58} contentStyle={{ flexDirection: 'row', alignItems: 'center', paddingHorizontal: 20, gap: 10 }}>
-        <Ionicons name="add-circle-outline" size={22} color={brand.primary} />
+        <SymbolView
+          name={{ ios: 'plus.circle', android: 'add_circle', web: 'add_circle' }}
+          size={22}
+          tintColor={brand.primary}
+        />
         <Text style={{ color: brand.primary, fontSize: 16, fontWeight: '600' }}>{t('add')}</Text>
       </NativeAction>
     </ScrollView>

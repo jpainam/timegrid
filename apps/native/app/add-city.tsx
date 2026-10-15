@@ -8,8 +8,8 @@ import {
 } from "@/src/domain/cities";
 import { useBrandColors, useSystemColors } from "@/theme/colors";
 import { Text } from "@codewithbeto/ui";
-import Ionicons from "@expo/vector-icons/Ionicons";
 import { router, Stack } from "expo-router";
+import { SymbolView } from "expo-symbols";
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { FlatList, useWindowDimensions, View } from "react-native";
@@ -71,7 +71,15 @@ export default function AddCity() {
             {t("alreadyAdded")}
           </Text>
         ) : (
-          <Ionicons name="add-circle-outline" size={24} color={brand.primary} />
+          <SymbolView
+            name={{
+              ios: "plus.circle",
+              android: "add_circle",
+              web: "add_circle",
+            }}
+            size={24}
+            tintColor={brand.primary}
+          />
         )}
       </NativeAction>
     );
